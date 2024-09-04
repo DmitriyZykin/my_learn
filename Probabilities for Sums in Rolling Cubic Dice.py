@@ -26,9 +26,9 @@ def rolldice_sum_prob(sum_, dice_amount):
                     summ += matrix_numbers[j][i]
                 list_sum.append(summ)
             count_cube += 1
-            fist_num_c = list_numbers[0]
+            fist_number = list_numbers[0]
             list_numbers.clear()
-            for h in range(fist_num_c + 1, count_cube * 6 + 1):
+            for h in range(fist_number + 1, count_cube * 6 + 1):
                 list_numbers.append(h)
 
         idx = list_numbers.index(sum_)
