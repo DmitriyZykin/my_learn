@@ -34,4 +34,4 @@ def rolldice_sum_prob(sum_, dice_amount):
         idx = list_numbers.index(sum_)
         rez = list_sum[idx] / 6 ** dice_amount
 
-    return rez
+        return rez
