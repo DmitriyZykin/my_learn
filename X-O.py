@@ -2,37 +2,26 @@
 
 
 def grid(value):
-    print('\n')
-    print(str(value[7] + '|' + value[8] + '|' + value[9]))
+
+    print('\n' + str(value[7] + '|' + value[8] + '|' + value[9]))
     print('-----')
     print(str(value[4] + '|' + value[5] + '|' + value[6]))
     print('-----')
-    print(str(value[1] + '|' + value[2] + '|' + value[3]))
-    return '\n'
-
+    return str(value[1] + '|' + value[2] + '|' + value[3]) + '\n'
 
 
 def vin(list_xo, X_O):
-    if list_xo[7] == X_O and list_xo[8] == X_O and list_xo[9] == X_O or \
-        list_xo[4] == X_O and list_xo[5] == X_O and list_xo[6] == X_O or \
-        list_xo[1] == X_O and list_xo[2] == X_O and list_xo[3] == X_O or \
-        list_xo[7] == X_O and list_xo[4] == X_O and list_xo[1] == X_O or \
-        list_xo[8] == X_O and list_xo[5] == X_O and list_xo[2] == X_O or \
-        list_xo[9] == X_O and list_xo[6] == X_O and list_xo[3] == X_O or \
-        list_xo[7] == X_O and list_xo[5] == X_O and list_xo[3] == X_O or \
-        list_xo[9] == X_O and list_xo[5] == X_O and list_xo[1] == X_O:
-        return 1
-    return 0
+    return list_xo[7] == list_xo[8] == list_xo[9] == X_O or \
+            list_xo[4] == list_xo[5] == list_xo[6] == X_O or \
+            list_xo[1] == list_xo[2] == list_xo[3] == X_O or \
+            list_xo[7] == list_xo[4] == list_xo[1] == X_O or \
+            list_xo[8] == list_xo[5] == list_xo[2] == X_O or \
+            list_xo[9] == list_xo[6] == list_xo[3] == X_O or \
+            list_xo[7] == list_xo[5] == list_xo[3] == X_O or \
+            list_xo[9] == list_xo[5] == list_xo[1] == X_O
 
-def draw(list_xo):
-    if list_xo[7] != ' ' and list_xo[8] != ' ' and list_xo[9] != ' ' and \
-        list_xo[4] != ' ' and list_xo[5] != ' ' and list_xo[6] != ' ' and \
-        list_xo[1] != ' ' and list_xo[2] != ' ' and list_xo[3] != ' ':
-        return 1
-    return 0
 
 def play(X,O,list_moves,new_list):
-    new_list = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     values = [' ', 'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X']
     for i in range(1,10):
         num = 0
@@ -41,6 +30,8 @@ def play(X,O,list_moves,new_list):
             if num_str.isdigit():
                 num = int(num_str)
             else:
+                continue
+            if num > 9 or num < 1:
                 continue
             if new_list[num] != ' ':
                 print("Это поле уже занято")
@@ -52,13 +43,15 @@ def play(X,O,list_moves,new_list):
             return f"Победа игрока {X}"
         if vin(new_list, 'O'):
             return f"Победа игрока {O}"
-        if draw(new_list):
+        if not ' ' in new_list[1:]:
             return "Ничья"
 
-my_list = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+
+my_list = [' '] * 10
 answer = ''
 marker = ''
 print(grid(my_list))
+
 while answer != 'да' and answer != 'нет':
     answer = input("Хотите сыграть в крестики-нолики? ").lower()
 while answer == 'да':
@@ -72,8 +65,9 @@ while answer == 'да':
         x = 2
         o = 1
         moves = ['','2','1','2','1','2','1','2','1','2']
-
+    my_list = [' '] * 10
     print(play(x,o,moves,my_list))
+
     answer = ''
     marker = ''
     while answer != 'да' and answer != 'нет':
